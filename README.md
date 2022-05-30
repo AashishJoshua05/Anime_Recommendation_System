@@ -1,4 +1,3 @@
-﻿# Anime Recommendation System
 # Anime Recommendation System
 This recommendation system uses the rating prediction to suggest similar anime
 to watch for the user, it makes use of the 
@@ -10,16 +9,12 @@ A vector Rx is taken for the user's anime watched, and it is being compared to
 The other user rating of that anime and being recommended similar anime to which
 the other users liked and rated in a similar manner.
 The formula:
-![formula](https://github.com/[AashishJoshua05]/[Anime_Recommendation_System]/blob/[master]/image.jpg?raw=true)
+![formula](https://github.com/AashishJoshua05/Anime_Recommendation_System/blob/master/image.jpg?raw=true)
 
 
 ### Members of the team
-1.SE20UARI002   Aashish Joshua James
-2.SE20UCSE110   V Neethu Dhwani
-3.SE20UCSE060   Karthik MVS
+1. SE20UARI002 - Aashish Joshua James
+2. SE20UCSE110 - V Neethu Dhwani
+3. SE20UCSE060 - Karthik MVS
 ![formula](%22C:%5CUsers%5CNEETHU%5CDownloads%5CWhatsApp%20Image%202022-05-30%20at%204.32.28%20PM.jpeg%22)
 
-### Members of the team
-SE20UARI002    Aashish Joshua James
-SE20UCSE110   V Neethu Dhwani
-SE20UCSE060   Karthik MVS
