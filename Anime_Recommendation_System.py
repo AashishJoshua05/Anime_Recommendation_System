@@ -11,8 +11,13 @@ other users rating of that anime and being recommended similiar anime to which
 the other users liked and rated in a similiar manner.
 The formula is stored in the Screenshot in this folder.
 
+
+The Below code is uploaded on my GitHub
+https://github.com/AashishJoshua05
 """
 #-------------------------------------------------------------------------------------------------------
+from hashlib import new
+from typing import Type
 import pandas as pd
 import numpy as np
 from time import sleep
@@ -47,7 +52,7 @@ def CreateSparseMatrix(rating_df, anime_df):
 #-------------------------------------------------------------------------------------------------------
 def SuggestSimilarAnime(X, anime_id_to_number, number_to_anime_id, watched_anime_id):
     # anime_id = 5114 #5114 #Anime_id for Full Metal Alchemist
-    k=11 # Top n suggesting anime
+    k=15 # Top n suggesting anime
     neighbour_ids = [] # List to store recommended anime ids
     try:
         anime_ind = anime_id_to_number[watched_anime_id]#Storing the Value of the anime_id key in dict which can be used in number_to_anime_id
@@ -59,11 +64,11 @@ def SuggestSimilarAnime(X, anime_id_to_number, number_to_anime_id, watched_anime
     kNN.fit(X) #Fitting the ratings of each anime in the KNN object
     neighbour = kNN.kneighbors(anime_vec, return_distance=False) # Stores an array of K nearest neighbors.
 
-    for i in range(0,11):
+    for i in range(0,k):
         n = neighbour.item(i)
         neighbour_ids.append(number_to_anime_id[n])
     #Stores the ids of the neighbors according to the data. as neighbors contains the number not id
-    neighbour_ids.pop(0)
+    # neighbour_ids.pop(0)
     return neighbour_ids
 #-------------------------------------------------------------------------------------------------------
 
@@ -79,8 +84,33 @@ def GetIDs(anime_watched, anime_titles):
     except:
         return 0
 #-------------------------------------------------------------------------------------------------------
+def CheckRepeat(animeIDList, animeTitles, userInput):
+    substring = list()
+    suggestedList = list()
+    suggestedListids = list()
+    
+    repeatedList = list()
+    repeatedListids = list()
+    substring.append(userInput)
 
+    for i in animeIDList:
+        suggestedList.append(anime_titles[i])
+        suggestedListids.append(i)
 
+    for i in range(len(suggestedList)):
+        res = any(sub in suggestedList[i] for sub in substring)
+        if str(res) == "True":
+            repeatedList.append(suggestedList[i])
+            repeatedListids.append(suggestedListids[i])
+
+    newSuggestedList = [ele for ele in suggestedList if ele not in repeatedList]
+    newSuggestedListids = [ele for ele in suggestedListids if ele not in repeatedListids]
+    if len(newSuggestedList) <= 7:
+        return suggestedListids
+    else:
+        return newSuggestedListids
+
+#-------------------------------------------------------------------------------------------------------
 
 #Main
 #-------------------------------------------------------------------------------------------------------
@@ -88,7 +118,7 @@ X, anime_id_to_number, number_to_anime_id, anime_titles = CreateSparseMatrix(rat
 
 while True:
     anime_watched = input("Enter an anime that you have watched and liked\n->").lower()
-    anime_watched_id = GetIDs(anime_watched, anime_titles)
+    anime_watched_id =  GetIDs(anime_watched, anime_titles)
     if anime_watched_id == 0:
         print("The anime name is wrong or doesn't exist\n try again.")
         sleep(2)
@@ -96,11 +126,14 @@ while True:
         continue
     else:
         similarAnime = SuggestSimilarAnime(X, anime_id_to_number, number_to_anime_id, anime_watched_id)
+        similarAnime = CheckRepeat(similarAnime, anime_titles, anime_titles[anime_watched_id])
+
         if similarAnime == 0:
             pass
         else:    
             print(f"Since you watched {anime_titles[anime_watched_id]} we would suggest watching\n")
             for i, j in enumerate(similarAnime, start=1):
+                
                 print(f"{i}){anime_titles[j]}")
             sleep(5)
         print("Did you watch another anime?\n")
