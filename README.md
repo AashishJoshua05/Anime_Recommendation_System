@@ -1,4 +1,5 @@
 ﻿# Anime Recommendation System
+# Anime Recommendation System
 This recommendation system uses the rating prediction to suggest similar anime
 to watch for the user, it makes use of the 
 kaggle anime data set =[kaggle data set](https://www.kaggle.com/datasets/CooperUnion/anime-recommendations-database)
@@ -16,3 +17,9 @@ The formula:
 1.SE20UARI002   Aashish Joshua James
 2.SE20UCSE110   V Neethu Dhwani
 3.SE20UCSE060   Karthik MVS
+![formula](%22C:%5CUsers%5CNEETHU%5CDownloads%5CWhatsApp%20Image%202022-05-30%20at%204.32.28%20PM.jpeg%22)
+
+### Members of the team
+SE20UARI002    Aashish Joshua James
+SE20UCSE110   V Neethu Dhwani
+SE20UCSE060   Karthik MVS
