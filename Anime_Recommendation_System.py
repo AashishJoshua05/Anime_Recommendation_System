@@ -16,8 +16,6 @@ The Below code is uploaded on my GitHub
 https://github.com/AashishJoshua05
 """
 #-------------------------------------------------------------------------------------------------------
-from hashlib import new
-from typing import Type
 import pandas as pd
 import numpy as np
 from time import sleep
@@ -30,6 +28,8 @@ rating_df = pd.read_csv('rating.csv')
 
 
 #-------------------------------------------------------------------------------------------------------
+#Function to create a SparseMatrix, Dictionaries to store the animeIds and their respective index's
+
 def CreateSparseMatrix(rating_df, anime_df):
     N = len(rating_df['user_id'].unique()) # 73515 No. Of users in data
     M = len(rating_df['anime_id'].unique()) # 11200 No. of anime in data
@@ -50,8 +50,8 @@ def CreateSparseMatrix(rating_df, anime_df):
 
 
 #-------------------------------------------------------------------------------------------------------
+#Function to suggest similiar 'n' similiar animes to the user based on the anime he watched
 def SuggestSimilarAnime(X, anime_id_to_number, number_to_anime_id, watched_anime_id):
-    # anime_id = 5114 #5114 #Anime_id for Full Metal Alchemist
     k=15 # Top n suggesting anime
     neighbour_ids = [] # List to store recommended anime ids
     try:
@@ -74,6 +74,7 @@ def SuggestSimilarAnime(X, anime_id_to_number, number_to_anime_id, watched_anime
 
 
 #-------------------------------------------------------------------------------------------------------
+#Function to get the anime ID from the anime name inputted by the user.
 def GetIDs(anime_watched, anime_titles):
     anime_titles_lower = dict((k, v.lower()) for k, v in anime_titles.items())
     key_list = list(anime_titles_lower.keys())
@@ -84,6 +85,7 @@ def GetIDs(anime_watched, anime_titles):
     except:
         return 0
 #-------------------------------------------------------------------------------------------------------
+#Utility function to prevent the repetition of certain anime due to error in database. 
 def CheckRepeat(animeIDList, animeTitles, userInput):
     substring = list()
     suggestedList = list()
@@ -103,9 +105,8 @@ def CheckRepeat(animeIDList, animeTitles, userInput):
             repeatedList.append(suggestedList[i])
             repeatedListids.append(suggestedListids[i])
 
-    newSuggestedList = [ele for ele in suggestedList if ele not in repeatedList]
     newSuggestedListids = [ele for ele in suggestedListids if ele not in repeatedListids]
-    if len(newSuggestedList) <= 7:
+    if len(newSuggestedListids) <= 7:
         return suggestedListids
     else:
         return newSuggestedListids

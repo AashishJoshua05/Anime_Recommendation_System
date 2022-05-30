@@ -17,6 +17,8 @@ Run the **Anime_Recommendation_System.py** on your system and input an anime of 
 if the anime is present in the database you will be suggested a minimum of 10 animes that are similiar 
 to the anime that you have inputted. The program will explain itself with the comments and also while running.
 
+**MAKE SURE THE CSV IS IN THE SAME FOLDER AS THE .PY**
+
 ### Members of the team
 1. SE20UARI002 - Aashish Joshua James
 2. SE20UCSE110 - V Neethu Dhwani
